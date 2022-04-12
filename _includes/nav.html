@@ -1,6 +1,6 @@
 <ul class="nav-list">
-  {%- assign titled_pages = site.pages
-        | where_exp:"item", "item.tag != nil" -%}
+  {%- assign titled_pages = include.pages
+        | where_exp:"item", "item.title != nil" -%}
 
   {%- comment -%}
     The values of `title` and `nav_order` can be numbers or strings.
@@ -74,7 +74,6 @@
         <a href="{{ node.url | absolute_url }}" class="nav-list-link{% if page.url == node.url %} active{% endif %}">{{ node.title }} {{node.tag}}</a>
         {%- if node.has_children -%}
           {%- assign children_list = pages_list | where: "parent", node.tag -%}
-          "{{pages_list}}"
           <ul class="nav-list ">
           {%- for child in children_list -%}
             {%- unless child.nav_exclude -%}
@@ -86,7 +85,7 @@
               {%- if child.has_children -%}
                 {%- comment -%}
                 test code ahead
-                {%- endcomment -%}
+                
                 <ul class="nav-list">
                {%- for potential_grand_child in pages_list -%}
                 {%- if potential_grand_child.grand_parent == node.tag -%}
@@ -94,7 +93,7 @@
                 {%- endif -%}
                {%- endfor -%}
                </ul>
-
+                {%- endcomment -%}
                 {%- assign grand_children_list = pages_list | where: "parent", child.tag | where: "grand_parent", node.tag -%}
                 <ul class="nav-list">
                 {%- for grand_child in grand_children_list -%}

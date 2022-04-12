@@ -27,6 +27,9 @@ Coming soon
 
 Deprecated
 {: .label .label-red }
+
+Orange
+{: .label .label-orange}
 </div>
 ```markdown
 Default label
@@ -46,4 +49,7 @@ Coming soon
 
 Deprecated
 {: .label .label-red }
+
+Orange
+{: .label .label-orange}
 ```

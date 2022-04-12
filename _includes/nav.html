@@ -88,7 +88,7 @@
                 {%- endcomment -%}
                {%- for potential_grand_child in pages_list -%}
                 {%- if potential_grand_child.grand_parent == node.tag -%}
-                    <p>"{{potential_grand_child.parent}}" == "${{child.tag}}"</p>
+                    <p>"{{potential_grand_child.parent}}" == "{{child.tag}}"</p>
                 {%- endif -%}
                {%- endfor -%}
 

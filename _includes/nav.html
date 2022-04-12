@@ -74,7 +74,7 @@
         <a href="{{ node.url | absolute_url }}" class="nav-list-link{% if page.url == node.url %} active{% endif %}">{{ node.title }} {{node.tag}}</a>
         {%- if node.has_children -%}
           {%- assign children_list = pages_list | where: "parent", node.tag -%}
-          "{{children_list}}"
+          "{{pages_list}}"
           <ul class="nav-list ">
           {%- for child in children_list -%}
             {%- unless child.nav_exclude -%}

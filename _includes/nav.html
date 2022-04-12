@@ -83,7 +83,16 @@
               {%- endif -%}
               <a href="{{ child.url | absolute_url }}" class="nav-list-link{% if page.url == child.url %} active{% endif %}">{{ child.title }}</a>
               {%- if child.has_children -%}
-                {%- assign grand_children_list = pages_list | where: "grand_parent", node.tag -%}
+                {%- comment -%}
+                test code ahead
+                {%- endcomment -%}
+               {%- for potential_grand_child in pages_list -%}
+                {%- if potential_grand_child.grand_parent == node.tag -%}
+                    <p>"{{potential_grand_child.parent}}" == "${{child.tag}}"</p>
+                {%- endif -%}
+               {%- endfor -%}
+
+                {%- assign grand_children_list = pages_list | where: "parent", child.tag | where: "grand_parent", node.tag -%}
                 <ul class="nav-list">
                 {%- for grand_child in grand_children_list -%}
                   {%- unless grand_child.nav_exclude -%}

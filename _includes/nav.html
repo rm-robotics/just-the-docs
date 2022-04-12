@@ -81,16 +81,18 @@
               {%- if child.has_children -%}
                 <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
               {%- endif -%}
-              <a href="{{ child.url | absolute_url }}" class="nav-list-link{% if page.url == child.url %} active{% endif %}">{{ child.title }}</a>
+              <a href="{{ child.url | absolute_url }}" class="nav-list-link{% if page.url == child.url %} active{% endif %}">{{ child.title }} + {{child.tag}}</a>
               {%- if child.has_children -%}
                 {%- comment -%}
                 test code ahead
                 {%- endcomment -%}
+                <ul class="nav-list">
                {%- for potential_grand_child in pages_list -%}
                 {%- if potential_grand_child.grand_parent == node.tag -%}
                     <p>"{{potential_grand_child.parent}}" == "{{child.tag}}"</p>
                 {%- endif -%}
                {%- endfor -%}
+               </ul>
 
                 {%- assign grand_children_list = pages_list | where: "parent", child.tag | where: "grand_parent", node.tag -%}
                 <ul class="nav-list">

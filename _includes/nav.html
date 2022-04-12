@@ -1,5 +1,5 @@
 <ul class="nav-list">
-  {%- assign titled_pages = site.html_pages
+  {%- assign titled_pages = site.pages
         | where_exp:"item", "item.tag != nil" -%}
 
   {%- comment -%}

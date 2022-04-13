@@ -7,6 +7,6 @@
       | where_exp: "item", "item.title != nil" -%}
   {%- assign pages_list = titled_pages -%}
   {%- for structureFile in site.data.StructureFileNames.main -%}
-    <li class="nav-list-item">{{ site.data.structureFile }}</li>
+    <li class="nav-list-item">{{ structureFile }} {{ site.data.structures[structureFile] }}</li>
   {%- endfor -%}
 </ul>

@@ -20,7 +20,7 @@
       {%- assign potential_pages = pages_list | where: "tag", index_page_tag -%}
       {%- if potential_pages.size == 0 -%}
       {%- assign potential_pages = pages_list | where: "title", index_page_tag -%}
-      {%- endif }
+      {%- endif -%}
       {%- assign current_page = potential_pages[0] -%}
       {% comment %}
         Begin html structure
@@ -31,7 +31,7 @@
       <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
       {%- endif -%}
       <a href="{{ current_page.url }}" class="nav-list-link{% if page.url == current_page.url %} active{% endif %}">{{ current_page.title }}</a>
-      
+
       </li>
     {%- endfor -%}
   {%- endfor -%}

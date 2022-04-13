@@ -16,7 +16,7 @@
       {% comment %}
         Get the page tag from the structure file and put the title
       {% endcomment %}
-      {%- assign potential_pages = pages_list | where "tag", index_page_tag -%}
+      {%- assign potential_pages = pages_list | where: "tag", index_page_tag -%}
       {%- assign current_page = potential_pages[0] -%}
       <li class="nav-list-item">{{ current_page.title }}</li>
     {%- endfor -%}

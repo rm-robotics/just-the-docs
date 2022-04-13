@@ -13,12 +13,26 @@
     {% endcomment %}
     {%- assign structure_data = site.data.structures[structureFile] -%}
     {%- for index_page_tag in structure_data.FileSystem -%}
+      
       {% comment %}
         Get the page tag from the structure file and put the title
       {% endcomment %}
       {%- assign potential_pages = pages_list | where: "tag", index_page_tag -%}
+      {%- if potential_pages.size == 0 -%}
+      {%- assign potential_pages = pages_list | where: "title", index_page_tag -%}
+      {%- endif }
       {%- assign current_page = potential_pages[0] -%}
-      <li class="nav-list-item">{{ current_page.title }}</li>
+      {% comment %}
+        Begin html structure
+      {% endcomment %}
+      <li class="nav-list-item{% if page.url == node.url %} active{% endif %}">
+
+      {%- if structure_data.children != nil -%}
+      <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
+      {%- endif -%}
+      <a href="{{ current_page.url }}" class="nav-list-link{% if page.url == current_page.url %} active{% endif %}">{{ current_page.title }}</a>
+      
+      </li>
     {%- endfor -%}
   {%- endfor -%}
 </ul>

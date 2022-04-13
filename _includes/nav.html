@@ -94,7 +94,7 @@
                {%- endfor -%}
                </ul>
                 {%- endcomment -%}
-                {%- assign grand_children_list = pages_list | where: "parent", child.tag | where: "grand_parent", node.tag -%}
+                {%- assign grand_children_list = pages_list | where: "parent", child.tag -%}
                 <ul class="nav-list">
                 {%- for grand_child in grand_children_list -%}
                   {%- unless grand_child.nav_exclude -%}

@@ -7,6 +7,18 @@
       | where_exp: "item", "item.title != nil" -%}
   {%- assign pages_list = titled_pages -%}
   {%- for structureFile in site.data.StructureFileNames.main -%}
-    <li class="nav-list-item">{{ structureFile }} {{ site.data.structures[structureFile] }}</li>
+    {% comment %}
+      Go through the list of structure files with file names specified in 
+      _data/StructureFileNames.yml inside _data/structures/
+    {% endcomment %}
+    {%- assign structure_data = site.data.structures[structureFile] -%}
+    {%- for index_page_tag in structure_data.FileSystem -%}
+      {% comment %}
+        Get the page tag from the structure file and put the title
+      {% endcomment %}
+      {%- assign potential_pages = pages_list | where "tag", index_page_tag -%}
+      {%- assign current_page = potential_pages[0] -%}
+      <li class="nav-list-item">{{ current_page.title }}</li>
+    {%- endfor -%}
   {%- endfor -%}
 </ul>

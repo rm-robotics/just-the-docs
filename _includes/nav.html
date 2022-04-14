@@ -12,35 +12,8 @@
       _data/StructureFileNames.yml inside _data/structures/
     {% endcomment %}
     {%- assign structure_data = site.data.structures[structureFile] -%}
-    {%- for index_page_tag in structure_data.FileSystem -%}
-      
-      {% comment %}
-        Get the page tag from the structure file and put the title
-      {% endcomment %}
-      {%- assign potential_pages_list = pages_list -%}
-      {%- if index_page_tag.child_folder_reqs.size != 0 -%}
-        {%- assign potential_pages_list = pages_list -%}
-        {%- for folder_name_required_in_path in index_page_tag.child_folder_reqs -%}
-          {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name_required_in_path" -%}
-          {{ potential_pages_list.size}}
-        {%- endfor -%}
-      {%- endif -%}
-      {%- assign potential_pages = potential_pages_list | where: "tag", index_page_tag -%}
-      {%- if potential_pages.size == 0 -%}
-      {%- assign potential_pages = potential_pages_list | where: "title", index_page_tag -%}
-      {%- endif -%}
-      {%- assign current_page = potential_pages[0] -%}
-      {% comment %}
-        Begin html structure
-      {% endcomment %}
-      <li class="nav-list-item{% if page.url == node.url %} active{% endif %}">
-
-      {%- if structure_data.children != nil -%}
-      <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
-      {%- endif -%}
-      <a href="{{ current_page.url }}" class="nav-list-link{% if page.url == current_page.url %} active{% endif %}">{{ current_page.title }}</a>
-
-      </li>
+    {%- for structure in structure_data.FileSystem -%}
+      {%- include nav_recursion.html structure=structure pages_list=titled_pages-%}
     {%- endfor -%}
   {%- endfor -%}
 </ul>

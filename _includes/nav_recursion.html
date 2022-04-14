@@ -1,0 +1,45 @@
+{%- comment -%}
+things required:
+include.structure
+include.folderNames
+include.pages
+{%- endcomment -%}
+<li class="nav-list-item{% if page.url == node.url or page.parent == node.tag or page.grand_parent == node.tag %} active{% endif %}">
+    {%- comment -%}
+    setup the html for this item itself first
+    {%- endcomment -%}
+
+    {%- comment -%}
+    Try filter via tag first. If filtering via tag doesn't work,
+    filter via title
+    Filter out potential pages first,
+    {%- endcomment -%}
+    {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.tag == include.structure.tag" -%}
+    {%- if potential_pages_list.size == 0 -%}
+        {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.title == include.structure.tag" -%}
+    {%- endif -%}
+    {%- if include.folderNames.size != 0 -%}
+        {%- for folder_name in include.folderNames -%}
+            {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name" -%}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- comment -%}
+    Pick the current item
+    {%- endcomment -%}
+    {%- assign current_page = potential_pages_list[0] -%}
+    {%- comment -%}
+    Setup the title itself
+    {%- endcomment -%}
+    {%- if current_page.has_children -%}
+        <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
+    {%- endif -%}
+    <a href="current_page.url" class="nav-list-link {% if page.url == child.url or page.parent == child.tag %} active{% endif %}">{{ current_page.title }}</a>
+    {%- comment -%}
+    Continue the recursion
+    {%- endcomment -%}
+    {%- if current_page.has_children -%}
+        {%- for child_structure in include.structure.children -%}
+            {%- include nav_recursion.html structure=child_structure folderNames=include.structure.child_folder_reqs pages_list=include.pages_list-%}
+        {%- endfor -%}
+    {%- endif -%}
+</li>

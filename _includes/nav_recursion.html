@@ -74,12 +74,13 @@ If the page itself, or any of its children are active, then this page tab should
             {%- assign current_tags = include.parentTags | join: "," | append: "," | append: current_page.tag | split: "," -%}
         {%- endif -%}
         {%- for child_structure in include.structure.children -%}
+            {%- assign sName = child_structure[0] -%}
             {%- include nav_recursion.html 
                 structure=child_structure 
                 folderNames=include.structure.child_folder_reqs 
                 pages_list=include.pages_list 
                 parentTags=current_tags
-                structureName=child_structure[0]
+                structureName=sName
             -%}
         {%- endfor -%}
         </ul>

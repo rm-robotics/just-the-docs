@@ -17,9 +17,14 @@
       {% comment %}
         Get the page tag from the structure file and put the title
       {% endcomment %}
-      {%- assign potential_pages = pages_list | where: "tag", index_page_tag -%}
+      {%- assign potential_pages_list = pages_list -%}
+      {%- if index_page_tag.children_from_folder != nil -%}
+        {%- assign potential_pages_list = pages_list | where_exp: "item", "item.children_from_folder contains index_page_tag.children_from_folder" -%}
+      {%- endif -%}
+
+      {%- assign potential_pages = potential_pages_list | where: "tag", index_page_tag -%}
       {%- if potential_pages.size == 0 -%}
-      {%- assign potential_pages = pages_list | where: "title", index_page_tag -%}
+      {%- assign potential_pages = potential_pages_list | where: "title", index_page_tag -%}
       {%- endif -%}
       {%- assign current_page = potential_pages[0] -%}
       {% comment %}

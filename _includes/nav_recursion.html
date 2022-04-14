@@ -34,8 +34,18 @@ include.parentTags
     {%- if include.structure.children != nil -%}
         <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
     {%- endif -%}
-    {%- assign should_be_active = page.tag == current_page.tag -%}
-    <a href="{{ current_page.url }}" class="nav-list-link {% if page.tag == current_page.tag %} active{% endif %}">{{ current_page.title }}</a>
+    {%- comment -%}
+    If the page itself, or any of its children are active, then this page should be active
+    {%- endcomment -%}
+    {%- assign active_value = "" -%}
+    {%- capture active_value -%}
+        {%- include nav_child_tag_search.html
+            structure=include.structure
+            goalTag=page.tag
+        -%}
+    {%- endcapture -%}
+
+    <a href="{{ current_page.url }}" class="nav-list-link {{ active_value }}">{{ current_page.title }}</a>
     {%- comment -%}
     Continue the recursion
     {%- endcomment -%}

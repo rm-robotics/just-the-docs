@@ -1,0 +1,27 @@
+{%- comment -%}
+this recursion requires:
+include.structure
+include.goalTag
+{%- endcomment -%}
+
+{%- if include.structure.children != nil -%}
+    {%- for child_structure in include.structure.children -%}
+        {%- if child_structure.tag == include.goalTag -%}
+            active
+            {%- break -%}
+        {%- endif -%}
+
+        {%- assign active_value = "" -%}
+        {%- capture active_value -%}
+            {%- include nav_child_tag_search.html
+                structure=child_structure
+                goalTag=include.goalTag
+            -%}
+        {%- endcapture -%}
+
+        {%- if active_value == "active" -%}
+            active
+            {%- break -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}

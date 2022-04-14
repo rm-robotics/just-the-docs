@@ -1,5 +1,6 @@
 {%- comment -%}
 things required:
+include.structureName
 include.structure
 include.folderNames
 include.pages
@@ -24,44 +25,61 @@ If the page itself, or any of its children are active, then this page tab should
     {%- endcomment -%}
 
     {%- comment -%}
-    Try filter via tag first. If filtering via tag doesn't work,
-    filter via title
-    Filter out potential pages first,
+    go through the cases where its not no_page first
     {%- endcomment -%}
-    {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.tag == include.structure.tag" -%}
-    {%- if potential_pages_list.size == 0 -%}
-        {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.title == include.structure.tag" -%}
+    {%- if include.structure.no_page != true -%}
+        {%- comment -%}
+        Try filter via tag first. If filtering via tag doesn't work,
+        filter via title
+        Filter out potential pages first,
+        {%- endcomment -%}
+        {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.tag == include.structure.tag" -%}
+        {%- if potential_pages_list.size == 0 -%}
+            {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.title == include.structure.tag" -%}
+        {%- endif -%}
+        {%- if include.folderNames.size != 0 -%}
+            {%- for folder_name in include.folderNames -%}
+                {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name" -%}
+            {%- endfor -%}
+        {%- endif -%}
+        {%- comment -%}
+        Pick the current item
+        {%- endcomment -%}
+        {%- assign current_page = potential_pages_list[0] -%}
+        {%- comment -%}
+        Setup the title itself
+        {%- endcomment -%}
+        {%- if include.structure.children != nil -%}
+            <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
+        {%- endif -%}
+        
+        <a href="{{ current_page.url }}" class="nav-list-link {{ active_value }}">{{ current_page.title }}</a>
+    {%- else -%}
+        {%- comment -%}
+        there is no page
+        {%- endcomment -%}
+        {%- if include.structure.children != nil -%}
+            <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
+        {%- endif -%}
+        <p class="nav-list-link">{{ include.structureName }}</p>
     {%- endif -%}
-    {%- if include.folderNames.size != 0 -%}
-        {%- for folder_name in include.folderNames -%}
-            {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name" -%}
-        {%- endfor -%}
-    {%- endif -%}
-    {%- comment -%}
-    Pick the current item
-    {%- endcomment -%}
-    {%- assign current_page = potential_pages_list[0] -%}
-    {%- comment -%}
-    Setup the title itself
-    {%- endcomment -%}
-    {%- if include.structure.children != nil -%}
-        <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
-    {%- endif -%}
-    
-
-    <a href="{{ current_page.url }}" class="nav-list-link {{ active_value }}">{{ current_page.title }}</a>
     {%- comment -%}
     Continue the recursion
     {%- endcomment -%}
-    {%- if current_page.has_children -%}
+    {%- if include.structure.children != nil -%}
         <ul class="nav-list {{ active_value }}">
-        {%- assign current_tags = include.parentTags | join: "," | append: "," | append: current_page.tag | split: "," -%}
+
+        {%- assign current_tags = include.parentTags -%}
+        {%- if include.structure.no_page != true -%}
+            {%- assign current_tags = include.parentTags | join: "," | append: "," | append: current_page.tag | split: "," -%}
+        {%- endif -%}
         {%- for child_structure in include.structure.children -%}
             {%- include nav_recursion.html 
                 structure=child_structure 
                 folderNames=include.structure.child_folder_reqs 
                 pages_list=include.pages_list 
-                parentTags=current_tags 
+                parentTags=current_tags
+                structureName=child_structure[0]
             -%}
         {%- endfor -%}
         </ul>

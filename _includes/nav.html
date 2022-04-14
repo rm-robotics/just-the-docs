@@ -14,7 +14,12 @@
     {%- assign structure_data = site.data.structures[structureFile] -%}
     {%- for structure in structure_data.FileSystem -%}
       {%- assign empty_tag_array = "imposadfsdfassible impossible2dasfdfasdfas" | split: " " -%}
-      {%- include nav_recursion.html structure=structure pages_list=titled_pages parentTags=empty_tag_array -%}
+      {%- include nav_recursion.html
+        structure=structure 
+        pages_list=titled_pages 
+        parentTags=empty_tag_array 
+        structureName=structure[0]
+      -%}
     {%- endfor -%}
   {%- endfor -%}
 </ul>

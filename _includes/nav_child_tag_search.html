@@ -23,11 +23,11 @@ include.goalTag
                 goalTag=include.goalTag
             -%}
         {%- endcapture -%}
-
         {%- if active_value == "active" -%}
             {{ active_string }}
             {%- break -%}
         {%- endif -%}
+
     {%- endfor -%}
 
 {%- else -%}

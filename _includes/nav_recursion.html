@@ -7,13 +7,13 @@ include.parentTags
 {%- endcomment -%}
 
 {%- comment -%}
-If the page itself, or any of its children are active, then this page should be active
+If the page itself, or any of its children are active, then this page tab should be active
 {%- endcomment -%}
 {%- assign active_value = "" -%}
 {%- capture active_value -%}
     {%- include nav_child_tag_search.html
         structure=include.structure
-        goalTag=page.tag
+        goalTag={{ page.tag | default: page.title }}
     -%}
 {%- endcapture -%}
 

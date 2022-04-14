@@ -1,6 +1,5 @@
 {%- comment -%}
 things required:
-include.structureName
 include.structure
 include.folderNames
 include.pages
@@ -53,7 +52,7 @@ If the page itself, or any of its children are active, then this page tab should
             <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
         {%- endif -%}
         
-        <a href="{{ current_page.url }}" class="nav-list-link {{ active_value }}">{{ current_page.title }}</a>
+        <a href="{{ current_page.url }}" class="nav-list-link {{ active_value }}">{{ include.structure.display_text | default: current_page.title }}</a>
     {%- else -%}
         {%- comment -%}
         there is no page
@@ -61,7 +60,7 @@ If the page itself, or any of its children are active, then this page tab should
         {%- if include.structure.children != nil -%}
             <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
         {%- endif -%}
-        <p class="nav-list-link">{{ include.structureName }}</p>
+        <p class="nav-list-link">{{ include.structure.display_text }}</p>
     {%- endif -%}
     {%- comment -%}
     Continue the recursion
@@ -74,13 +73,11 @@ If the page itself, or any of its children are active, then this page tab should
             {%- assign current_tags = include.parentTags | join: "," | append: "," | append: current_page.tag | split: "," -%}
         {%- endif -%}
         {%- for child_structure in include.structure.children -%}
-            {%- assign sName = child_structure[0] -%}
             {%- include nav_recursion.html 
                 structure=child_structure 
                 folderNames=include.structure.child_folder_reqs 
                 pages_list=include.pages_list 
                 parentTags=current_tags
-                structureName=sName
             -%}
         {%- endfor -%}
         </ul>

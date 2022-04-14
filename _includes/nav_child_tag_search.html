@@ -3,11 +3,12 @@ this recursion requires:
 include.structure
 include.goalTag
 {%- endcomment -%}
+{%- assign active_string = "active" -%}
 
 {%- if include.structure.children != nil -%}
     {%- for child_structure in include.structure.children -%}
         {%- if child_structure.tag == include.goalTag -%}
-            "active"
+            {{ active_string }}
             {%- break -%}
         {%- endif -%}
 
@@ -20,8 +21,10 @@ include.goalTag
         {%- endcapture -%}
 
         {%- if active_value == "active" -%}
-            "active"
+            {{ active_string }}
             {%- break -%}
         {%- endif -%}
     {%- endfor -%}
 {%- endif -%}
+
+active

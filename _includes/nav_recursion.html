@@ -4,6 +4,7 @@ include.structure
 include.folderNames
 include.pages
 include.parentTags
+include.mustActive (optional)
 {%- endcomment -%}
 
 {%- comment -%}
@@ -17,6 +18,9 @@ If the page itself, or any of its children are active, then this page tab should
         goalTag=TMP_TAG_OR_TITLE
     -%}
 {%- endcapture -%}
+{%- if include.mustActive == true -%}
+    {%- assign active_value = "active" -%}
+{%- endif -%}
 
 <li class="nav-list-item {{ active_value }}">
     {%- comment -%}
@@ -67,8 +71,10 @@ If the page itself, or any of its children are active, then this page tab should
     {%- endcomment -%}
     {%- if include.structure.children != nil -%}
         {%- assign child_list_activeness = active_value -%}
+        {%- assign child_must_active = false -%}
         {%- if include.structure.no_page == true -%}
             {%- assign child_list_activeness = "active" -%}
+            {%- assign child_must_active = true -%}
         {%- endif -%}
         <ul class="nav-list {{ child_list_activeness }}">
 
@@ -82,6 +88,7 @@ If the page itself, or any of its children are active, then this page tab should
                 folderNames=include.structure.child_folder_reqs 
                 pages_list=include.pages_list 
                 parentTags=current_tags
+                mustActive=child_must_active
             -%}
         {%- endfor -%}
         </ul>

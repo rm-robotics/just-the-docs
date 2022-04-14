@@ -29,5 +29,13 @@ include.goalTag
             {%- break -%}
         {%- endif -%}
     {%- endfor -%}
+
+{%- else -%}
+    {%- comment -%}
+    no children
+    {%- endcomment -%}
+    {%- if include.structure.tag == include.goalTag -%}
+        {{ active_string }}
+    {%- endif -%}
 {%- endif -%}
 

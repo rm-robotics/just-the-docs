@@ -38,8 +38,10 @@ include.pages
     Continue the recursion
     {%- endcomment -%}
     {%- if current_page.has_children -%}
+        <ul class="nav-list">
         {%- for child_structure in include.structure.children -%}
             {%- include nav_recursion.html structure=child_structure folderNames=include.structure.child_folder_reqs pages_list=include.pages_list-%}
         {%- endfor -%}
+        </ul>
     {%- endif -%}
 </li>

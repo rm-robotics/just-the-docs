@@ -70,12 +70,14 @@ If the page itself, or any of its children are active, then this page tab should
     Continue the recursion
     {%- endcomment -%}
     {%- if include.structure.children != nil -%}
+
         {%- assign child_list_activeness = active_value -%}
         {%- assign child_must_active = false -%}
         {%- if include.structure.no_page == true -%}
             {%- assign child_list_activeness = "active" -%}
             {%- assign child_must_active = true -%}
         {%- endif -%}
+        
         <ul class="nav-list {{ child_list_activeness }}">
 
         {%- assign current_tags = include.parentTags -%}

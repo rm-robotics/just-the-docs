@@ -60,13 +60,17 @@ If the page itself, or any of its children are active, then this page tab should
         {%- if include.structure.children != nil -%}
             <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
         {%- endif -%}
-        <p class="nav-list-link">{{ include.structure.display_text }}</p>
+        <a class="nav-list-link">{{ include.structure.display_text }}</a>
     {%- endif -%}
     {%- comment -%}
     Continue the recursion
     {%- endcomment -%}
     {%- if include.structure.children != nil -%}
-        <ul class="nav-list {{ active_value }}">
+        {%- assign child_list_activeness = active_value -%}
+        {%- if include.structure.no_page == true -%}
+            {%- assign child_list_activeness = "active" -%}
+        {%- endif -%}
+        <ul class="nav-list {{ child_list_activeness }}">
 
         {%- assign current_tags = include.parentTags -%}
         {%- if include.structure.no_page != true -%}

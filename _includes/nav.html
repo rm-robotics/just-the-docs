@@ -24,7 +24,7 @@
           {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name_required_in_path" -%}
         {%- endfor -%}
       {%- endif -%}
-
+      {{ potential_pages_list }}
       {%- assign potential_pages = potential_pages_list | where: "tag", index_page_tag -%}
       {%- if potential_pages.size == 0 -%}
       {%- assign potential_pages = potential_pages_list | where: "title", index_page_tag -%}

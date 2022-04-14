@@ -7,7 +7,7 @@ include.goalTag
 {%- if include.structure.children != nil -%}
     {%- for child_structure in include.structure.children -%}
         {%- if child_structure.tag == include.goalTag -%}
-            active
+            "active"
             {%- break -%}
         {%- endif -%}
 
@@ -20,7 +20,7 @@ include.goalTag
         {%- endcapture -%}
 
         {%- if active_value == "active" -%}
-            active
+            "active"
             {%- break -%}
         {%- endif -%}
     {%- endfor -%}

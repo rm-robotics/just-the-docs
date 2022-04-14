@@ -33,7 +33,7 @@ include.pages
     {%- if current_page.has_children -%}
         <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
     {%- endif -%}
-    <a href="current_page.url" class="nav-list-link {% if page.url == child.url or page.parent == child.tag %} active{% endif %}">{{ current_page.title }}</a>
+    <a href="{{ current_page.url }}" class="nav-list-link {% if page.url == child.url or page.parent == child.tag %} active{% endif %}">{{ current_page.title }}</a>
     {%- comment -%}
     Continue the recursion
     {%- endcomment -%}

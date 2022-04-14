@@ -5,7 +5,19 @@ include.folderNames
 include.pages
 include.parentTags
 {%- endcomment -%}
-<li class="nav-list-item{% if page.url == node.url or page.parent == node.tag or page.grand_parent == node.tag %} active{% endif %}">
+
+{%- comment -%}
+If the page itself, or any of its children are active, then this page should be active
+{%- endcomment -%}
+{%- assign active_value = "" -%}
+{%- capture active_value -%}
+    {%- include nav_child_tag_search.html
+        structure=include.structure
+        goalTag=page.tag
+    -%}
+{%- endcapture -%}
+
+<li class="nav-list-item {{ active_value }}">
     {%- comment -%}
     setup the html for this item itself first
     {%- endcomment -%}
@@ -34,16 +46,7 @@ include.parentTags
     {%- if include.structure.children != nil -%}
         <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
     {%- endif -%}
-    {%- comment -%}
-    If the page itself, or any of its children are active, then this page should be active
-    {%- endcomment -%}
-    {%- assign active_value = "" -%}
-    {%- capture active_value -%}
-        {%- include nav_child_tag_search.html
-            structure=include.structure
-            goalTag=page.tag
-        -%}
-    {%- endcapture -%}
+    
 
     <a href="{{ current_page.url }}" class="nav-list-link {{ active_value }}">{{ current_page.title }}</a>
     {%- comment -%}

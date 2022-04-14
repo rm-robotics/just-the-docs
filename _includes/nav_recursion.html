@@ -13,7 +13,7 @@ If the page itself, or any of its children are active, then this page tab should
 {%- capture active_value -%}
     {%- include nav_child_tag_search.html
         structure=include.structure
-        goalTag={{ page.tag | default: page.title }}
+        goalTag="{{ page.tag | default: page.title }}"
     -%}
 {%- endcapture -%}
 

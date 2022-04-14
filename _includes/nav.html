@@ -18,8 +18,11 @@
         Get the page tag from the structure file and put the title
       {% endcomment %}
       {%- assign potential_pages_list = pages_list -%}
-      {%- if index_page_tag.children_from_folder != nil -%}
-        {%- assign potential_pages_list = pages_list | where_exp: "item", "item.children_from_folder contains index_page_tag.children_from_folder" -%}
+      {%- if index_page_tag.child_folder_reqs != nil -%}
+        {%- assign potential_pages_list = pages_list -%}
+        {%- for folder_name_required_in_path in index_page_tag.child_folder_reqs -%}
+          {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name_required_in_path" -%}
+        {%- endif -%}
       {%- endif -%}
 
       {%- assign potential_pages = potential_pages_list | where: "tag", index_page_tag -%}

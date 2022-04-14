@@ -3,6 +3,7 @@ things required:
 include.structure
 include.folderNames
 include.pages
+include.parentTags
 {%- endcomment -%}
 <li class="nav-list-item{% if page.url == node.url or page.parent == node.tag or page.grand_parent == node.tag %} active{% endif %}">
     {%- comment -%}
@@ -33,14 +34,21 @@ include.pages
     {%- if include.structure.children != nil -%}
         <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
     {%- endif -%}
+    {%- assign should_be_active = page.tag == current_page.tag -%}
     <a href="{{ current_page.url }}" class="nav-list-link {% if page.tag == current_page.tag %} active{% endif %}">{{ current_page.title }}</a>
     {%- comment -%}
     Continue the recursion
     {%- endcomment -%}
     {%- if current_page.has_children -%}
         <ul class="nav-list">
+        {%- assign current_tags = include.parentTags | join: "," | append: "," | append: current_page.tag | split: "," -%}
         {%- for child_structure in include.structure.children -%}
-            {%- include nav_recursion.html structure=child_structure folderNames=include.structure.child_folder_reqs pages_list=include.pages_list-%}
+            {%- include nav_recursion.html 
+                structure=child_structure 
+                folderNames=include.structure.child_folder_reqs 
+                pages_list=include.pages_list 
+                parentTags=current_tags 
+            -%}
         {%- endfor -%}
         </ul>
     {%- endif -%}

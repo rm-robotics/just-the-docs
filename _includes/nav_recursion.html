@@ -18,8 +18,7 @@ If the page itself, or any of its children are active, then this page tab should
         goalTag=TMP_TAG_OR_TITLE
     -%}
 {%- endcapture -%}
-{%- if include.mustActive == true -%}
-    ACTIVE ACTIVE
+{%- if include.mustActive == true or include.structure.no_page == true -%}
     {%- assign active_value = "active" -%}
 {%- endif -%}
 

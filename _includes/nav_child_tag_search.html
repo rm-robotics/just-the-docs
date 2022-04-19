@@ -2,11 +2,13 @@
 this recursion requires:
 include.structure
 include.goalTag
+include.required_foldernames
 {%- endcomment -%}
 {%- assign active_string = "active" -%}
 
 {%- if include.structure.children != nil -%}
     {%- for child_structure in include.structure.children -%}
+    
         {%- if include.structure.tag == include.goalTag -%}
             {{ active_string }}
             {%- break -%}

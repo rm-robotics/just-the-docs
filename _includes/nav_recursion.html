@@ -82,7 +82,7 @@ If the page itself, or any of its children are active, then this page tab should
 
         {%- assign current_tags = include.parentTags -%}
         {%- if include.structure.no_page != true -%}
-            {%- assign current_tags = include.parentTags | join: "," | append: "," | append: current_page.tag | split: "," -%}
+            {%- assign current_tags = include.parentTags | split: "," | append: current_page.tag | append: "," | join: "," -%}
         {%- endif -%}
         {%- for child_structure in include.structure.children -%}
             {%- include nav_recursion.html 

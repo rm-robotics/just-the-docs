@@ -6,38 +6,41 @@ include.required_foldernames
 {%- endcomment -%}
 {%- assign active_string = "active" -%}
 
-{%- if include.structure.children != nil -%}
-    {%- for child_structure in include.structure.children -%}
-    
-        {%- if include.structure.tag == include.goalTag -%}
-            {{ active_string }}
-            {%- break -%}
+{%- assign will_iterate_children = true -%}
+{%- if include.structure.no_page != true -%}
+    {%- comment -%}
+    \   check if this current page is active
+    {%- endcomment -%}
+    {%- assign potential_pages_list = site.pages | where_exp: "item", "item.tag == include.structure.tag" -%}
+    {%- if potential_pages_list.size == 0 -%}
+        {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.title == include.structure.tag" -%}
+    {%- endif -%}
+    {%- assign potential_pages_list = include.pages_list | where_exp: "item", "item.tag == include.goalTag" -%}
+    {%- if include.required_foldernames.size != 0 -%}
+        {%- for folder_name in include.required_foldernames -%}
+            {%- assign potential_pages_list = potential_pages_list | where_exp: "item", "item.path contains folder_name" -%}
+        {%- endfor -%}
+    {%- endif -%}
+    {%- if include.potential_pages_list.size != 0 -%}
+        {{ active_string }}
+        {%- assign will_iterate_children = false -%}
+    {%- endif -%}
+{%- endif -%}
+{%- if will_iterate_children -%}
+    {%- if include.structure.children != nil -%}
+        {%- assign new_child_folder_reqs = include.required_foldernames -%}
+        {%- if include.structure.child_folder_reqs != nil -%}
+            {%- assign folderNameString = include.required_foldernames | join: "," -%}
+            {%- assign newFolderNamesString = include.structure.child_folder_reqs | join: "," -%}
+            {%- assign completeString = folderNameString | append: "," | append: newFolderNamesString -%}
+            {%- assign new_child_folder_reqs = completeString | split: "," -%}
         {%- endif -%}
-        {%- if child_structure.tag == include.goalTag -%}
-            {{ active_string }}
-            {%- break -%}
-        {%- endif -%}
-
-        {%- assign active_value = "" -%}
-        {%- capture active_value -%}
+        {%- for child_structure in include.structure.children -%}
             {%- include nav_child_tag_search.html
                 structure=child_structure
                 goalTag=include.goalTag
+                required_foldernames=new_child_folder_reqs
             -%}
-        {%- endcapture -%}
-        {%- if active_value == "active" -%}
-            {{ active_string }}
-            {%- break -%}
-        {%- endif -%}
-
-    {%- endfor -%}
-
-{%- else -%}
-    {%- comment -%}
-    no children
-    {%- endcomment -%}
-    {%- if include.structure.tag == include.goalTag -%}
-        {{ active_string }}
+        {%- endfor -%}
     {%- endif -%}
 {%- endif -%}
-

@@ -11,7 +11,7 @@
     <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
     <a class="nav-list-link">{{ structureSource.display_text }}</a>
     <ul class="nav-list active">
-    {%- for structureFile in structureSource -%}
+    {%- for structureFile in structureSource.children -%}
       {% comment %}
       Go through the list of structure files with file names specified in 
       _data/StructureFileNames.yml inside _data/structures/

@@ -6,7 +6,7 @@
   {%- assign titled_pages = include.pages
       | where_exp: "item", "item.title != nil" -%}
   {%- assign pages_list = titled_pages -%}
-  {%- for structureSource in site.data.StructureFileNames -%}
+  {%- for structureSource in site.data.StructureFileNames.MAIN -%}
     <li class="nav-list-item active">
     <a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a>
     <a class="nav-list-link">{{ structureSource.display_text }}</a>

@@ -6,22 +6,24 @@
   {%- assign titled_pages = include.pages
       | where_exp: "item", "item.title != nil" -%}
   {%- assign pages_list = titled_pages -%}
-  {%- for structureFile in site.data.StructureFileNames.main -%}
-    {% comment %}
+  {%- for structureSource in site.data.StructureFileNames -%}
+    {%- for structureFile in site.data.StructureFileNames[structureSource] -%}
+      {% comment %}
       Go through the list of structure files with file names specified in 
       _data/StructureFileNames.yml inside _data/structures/
-    {% endcomment %}
-    {%- assign structure_data = site.data.structures[structureFile] -%}
-    {%- for structure in structure_data.FileSystem -%}
-      {%- assign empty_tag_array = "NULL NULL2" | split: " " -%}
-      {%- if structure.child_folder_reqs != nil -%}
-        {%- assign empty_tag_array = structure.child_folder_reqs -%}
-      {%- endif -%}
-      {%- include nav_recursion.html
-        structure=structure 
-        pages_list=titled_pages 
-        parentTags=empty_tag_array
-      -%}
+      {% endcomment %}
+      {%- assign structure_data = site.data.structures[structureFile] -%}
+      {%- for structure in structure_data.FileSystem -%}
+        {%- assign empty_tag_array = "NULL NULL2" | split: " " -%}
+        {%- if structure.child_folder_reqs != nil -%}
+          {%- assign empty_tag_array = structure.child_folder_reqs -%}
+        {%- endif -%}
+        {%- include nav_recursion.html
+          structure=structure 
+          pages_list=titled_pages 
+          parentTags=empty_tag_array
+        -%}
+      {%- endfor -%}
     {%- endfor -%}
   {%- endfor -%}
 </ul>

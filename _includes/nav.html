@@ -7,7 +7,7 @@
       | where_exp: "item", "item.title != nil" -%}
   {%- assign pages_list = titled_pages -%}
   {%- for structureSource in site.data.StructureFileNames -%}
-    {%- for structureFile in site.data.StructureFileNames[structureSource] -%}
+    {%- for structureFile in structureSource -%}
       {% comment %}
       Go through the list of structure files with file names specified in 
       _data/StructureFileNames.yml inside _data/structures/

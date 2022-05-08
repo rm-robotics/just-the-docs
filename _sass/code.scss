@@ -109,7 +109,7 @@ figure.highlight {
   }
 }
 
-/*
+
 // follow visual studio 2022 blue mode color schemes
 // green color for comment //
 $code-comment-color: #257944;
@@ -201,16 +201,16 @@ $code-keyword-color: #c200c2;
   color: #cb4b16;
 } // keyword.constant //
 .highlight .kd {
-  color: #268bd2;
+  color: $code-class-color;
 } // keyword.declaration //
 .highlight .kn {
   color: $code-class-color;
 } // keyword.namespace //
 .highlight .kp {
-  color: #859900;
+  color: $code-keyword-color;
 } // keyword.pseudo //
 .highlight .kr {
-  color: #268bd2;
+  color: $code-keyword-color;
 } // keyword.reserved //
 .highlight .kt {
   color: $code-class-color;
@@ -228,7 +228,7 @@ $code-keyword-color: #c200c2;
   color: $code-text-color;
 } // name.attribute //
 .highlight .nb {
-  color: #b58900;
+  color: $code-text-color;
 } // name.builtin //
 .highlight .nc {
   color: $code-class-color;
@@ -333,7 +333,7 @@ $code-keyword-color: #c200c2;
 .highlight .il {
   color: $code-literal-color;
 } // literal.number.integer.long //
-*/
+
 //
 // Code examples (rendered)
 //

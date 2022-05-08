@@ -109,9 +109,10 @@ figure.highlight {
   }
 }
 
+/*
 // follow visual studio 2022 blue mode color schemes
 // green color for comment //
-$code-comment-color: #00c247;
+$code-comment-color: #257944;
 // blue color for classes //
 $code-class-color: #0017c2;
 // green-blue color for literals //
@@ -122,6 +123,8 @@ $code-literal-string-color: #c20044;
 $code-text-color: #000000;
 //brownish color for function
 $code-function-color: #8a6a4d;
+// pink purple for keywords
+$code-keyword-color: #c200c2;
 
 .highlight .c {
   color: $code-comment-color;
@@ -133,7 +136,7 @@ $code-function-color: #8a6a4d;
   color: #93a1a1;
 } // generic //
 .highlight .k {
-  color: #859900;
+  color: $code-keyword-color;
 } // keyword //
 .highlight .l {
   color: $code-literal-color;
@@ -330,7 +333,7 @@ $code-function-color: #8a6a4d;
 .highlight .il {
   color: $code-literal-color;
 } // literal.number.integer.long //
-
+*/
 //
 // Code examples (rendered)
 //

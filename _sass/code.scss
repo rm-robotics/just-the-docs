@@ -109,8 +109,22 @@ figure.highlight {
   }
 }
 
+// follow visual studio 2022 blue mode color schemes
+// green color for comment //
+$code-comment-color: #00c247;
+// blue color for classes //
+$code-class-color: #0017c2;
+// green-blue color for literals //
+$code-literal-color: #00c2c2;
+// pink-red color for string literals
+$code-literal-string-color: #c20044;
+// black color for normal text 
+$code-text-color: #000000;
+//brownish color for function
+$code-function-color: #8a6a4d;
+
 .highlight .c {
-  color: #586e75;
+  color: $code-comment-color;
 } // comment //
 .highlight .err {
   color: #93a1a1;
@@ -122,13 +136,13 @@ figure.highlight {
   color: #859900;
 } // keyword //
 .highlight .l {
-  color: #93a1a1;
+  color: $code-literal-color;
 } // literal //
 .highlight .n {
-  color: #93a1a1;
+  color: $code-text-color;
 } // name //
 .highlight .o {
-  color: #859900;
+  color: $code-text-color;
 } // operator //
 .highlight .x {
   color: #cb4b16;
@@ -137,16 +151,16 @@ figure.highlight {
   color: #93a1a1;
 } // punctuation //
 .highlight .cm {
-  color: #586e75;
+  color: $code-comment-color;
 } // comment.multiline //
 .highlight .cp {
-  color: #859900;
+  color: $code-comment-color;
 } // comment.preproc //
 .highlight .c1 {
-  color: #586e75;
+  color: $code-comment-color;
 } // comment.single //
 .highlight .cs {
-  color: #859900;
+  color: $code-comment-color;
 } // comment.special //
 .highlight .gd {
   color: #2aa198;
@@ -187,7 +201,7 @@ figure.highlight {
   color: #268bd2;
 } // keyword.declaration //
 .highlight .kn {
-  color: #859900;
+  color: $code-class-color;
 } // keyword.namespace //
 .highlight .kp {
   color: #859900;
@@ -196,58 +210,58 @@ figure.highlight {
   color: #268bd2;
 } // keyword.reserved //
 .highlight .kt {
-  color: #dc322f;
+  color: $code-class-color;
 } // keyword.type //
 .highlight .ld {
-  color: #93a1a1;
+  color: $code-literal-color;
 } // literal.date //
 .highlight .m {
-  color: #2aa198;
+  color: $code-literal-color;
 } // literal.number //
 .highlight .s {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string //
 .highlight .na {
-  color: #555;
+  color: $code-text-color;
 } // name.attribute //
 .highlight .nb {
   color: #b58900;
 } // name.builtin //
 .highlight .nc {
-  color: #268bd2;
+  color: $code-class-color;
 } // name.class //
 .highlight .no {
-  color: #cb4b16;
+  color: $code-text-color;
 } // name.constant //
 .highlight .nd {
-  color: #268bd2;
+  color: $code-text-color;
 } // name.decorator //
 .highlight .ni {
-  color: #cb4b16;
+  color: $code-text-color;
 } // name.entity //
 .highlight .ne {
   color: #cb4b16;
 } // name.exception //
 .highlight .nf {
-  color: #268bd2;
+  color: $code-function-color;
 } // name.function //
 .highlight .nl {
-  color: #555;
+  color: $code-text-color;
 } // name.label //
 .highlight .nn {
-  color: #93a1a1;
+  color: $code-class-color;
 } // name.namespace //
 .highlight .nx {
-  color: #555;
+  color: $code-text-color;
 } // name.other //
 .highlight .py {
-  color: #93a1a1;
+  color: $code-text-color;
 } // name.property //
 .highlight .nt {
-  color: #268bd2;
+  color: $code-text-color;
 } // name.tag //
 .highlight .nv {
-  color: #268bd2;
+  color: $code-text-color;
 } // name.variable //
 .highlight .ow {
   color: #859900;
@@ -256,64 +270,65 @@ figure.highlight {
   color: #93a1a1;
 } // text.whitespace //
 .highlight .mf {
-  color: #2aa198;
+  color: $code-literal-color;
 } // literal.number.float //
 .highlight .mh {
-  color: #2aa198;
+  color: $code-literal-color;
 } // literal.number.hex //
 .highlight .mi {
-  color: #2aa198;
+  color: $code-literal-color;
 } // literal.number.integer //
 .highlight .mo {
-  color: #2aa198;
+  color: $code-literal-color;
 } // literal.number.oct //
 .highlight .sb {
-  color: #586e75;
+  color: $code-literal-string-color;
 } // literal.string.backtick //
 .highlight .sc {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string.char //
 .highlight .sd {
-  color: #93a1a1;
+  color: $code-literal-string-color;
 } // literal.string.doc //
 .highlight .s2 {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string.double //
+// make the escape key \ colored blue (for now)
 .highlight .se {
-  color: #cb4b16;
+  color: $code-class-color;
 } // literal.string.escape //
 .highlight .sh {
-  color: #93a1a1;
+  color: $code-literal-string-color;
 } // literal.string.heredoc //
 .highlight .si {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string.interpol //
 .highlight .sx {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string.other //
 .highlight .sr {
-  color: #dc322f;
+  color: $code-literal-string-color;
 } // literal.string.regex //
 .highlight .s1 {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string.single //
 .highlight .ss {
-  color: #2aa198;
+  color: $code-literal-string-color;
 } // literal.string.symbol //
 .highlight .bp {
   color: #268bd2;
 } // name.builtin.pseudo //
 .highlight .vc {
-  color: #268bd2;
+  color: $code-class-color;
 } // name.variable.class //
 .highlight .vg {
-  color: #268bd2;
+  color: $code-text-color;
 } // name.variable.global //
 .highlight .vi {
-  color: #268bd2;
+  color: $code-text-color;
 } // name.variable.instance //
 .highlight .il {
-  color: #2aa198;
+  color: $code-literal-color;
 } // literal.number.integer.long //
 
 //

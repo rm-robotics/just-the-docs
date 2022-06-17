@@ -95,7 +95,7 @@ If the page itself, or any of its children are active, then this page tab should
 
         {%- for child_structure in include.structure.children -%}
             {%- assign deep_copy_joined_folder_reqs = new_child_folder_reqs | join: "," -%}
-            {%- assign deep_copied_folder_reqs = deep_copy_joined_folder_reqs | split "," -%}
+            {%- assign deep_copied_folder_reqs = deep_copy_joined_folder_reqs | split: "," -%}
             {%- include nav_recursion.html 
                 structure=child_structure 
                 folderNames=deep_copied_folder_reqs

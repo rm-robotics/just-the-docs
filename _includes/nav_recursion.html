@@ -11,7 +11,7 @@ include.mustActive (optional)
 {%- comment -%}
 If the page itself, or any of its children are active, then this page tab should be active
 {%- endcomment -%}
-{%- assign TMP_TAG_OR_TITLE = page.tag | default: page.title }}
+{%- assign TMP_TAG_OR_TITLE = page.tag | default: page.title -%}
 {%- assign active_value = "" -%}
 {%- capture active_value -%}
     {%- include nav_child_tag_search.html

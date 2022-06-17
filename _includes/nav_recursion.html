@@ -84,17 +84,15 @@ If the page itself, or any of its children are active, then this page tab should
         {%- if include.structure.no_page != true -%}
             {%- assign current_tags = include.parentTags | join: "," | append: current_page.tag | append: "," | split: "," -%}
         {%- endif -%}
-
-        {%- assign new_child_folder_reqs = include.folderNames-%}
-        {%- if include.structure.child_folder_reqs != nil -%}
-            {%- assign folderNameString = include.folderNames | join: "," -%}
-            {%- assign newFolderNamesString = include.structure.child_folder_reqs | join: "," -%}
-            {%- assign completeString = folderNameString | append: "," | append: newFolderNamesString -%}
-            {%- assign new_child_folder_reqs = completeString | split: "," -%}
-        {%- endif -%}
-        {{ new_child_folder_reqs }} \\\\\\\\\\\\\\\\\\\wow\\\\\\\\\\\\\\
         {%- for child_structure in include.structure.children -%}
-            {{ new_child_folder_reqs }}
+            {%- assign new_child_folder_reqs = include.folderNames-%}
+            {%- if include.structure.child_folder_reqs != nil -%}
+                {%- assign folderNameString = include.folderNames | join: "," -%}
+                {%- assign newFolderNamesString = include.structure.child_folder_reqs | join: "," -%}
+                {%- assign completeString = folderNameString | append: "," | append: newFolderNamesString -%}
+                {%- assign new_child_folder_reqs = completeString | split: "," -%}
+            {%- endif -%}
+            
             {%- include nav_recursion.html 
                 structure=child_structure 
                 folderNames=new_child_folder_reqs

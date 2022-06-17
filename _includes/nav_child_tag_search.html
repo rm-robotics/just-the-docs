@@ -25,14 +25,15 @@ include.required_foldernames
 {%- endif -%}
 {%- if will_iterate_children -%}
     {%- if include.structure.children != nil -%}
-        {%- assign new_child_folder_reqs = include.required_foldernames -%}
-        {%- if include.structure.child_folder_reqs != nil -%}
-            {%- assign folderNameString = include.required_foldernames | join: "," -%}
-            {%- assign newFolderNamesString = include.structure.child_folder_reqs | join: "," -%}
-            {%- assign completeString = folderNameString | append: "," | append: newFolderNamesString -%}
-            {%- assign new_child_folder_reqs = completeString | split: "," -%}
-        {%- endif -%}
+        
         {%- for child_structure in include.structure.children -%}
+            {%- assign new_child_folder_reqs = include.required_foldernames -%}
+            {%- if include.structure.child_folder_reqs != nil -%}
+                {%- assign folderNameString = include.required_foldernames | join: "," -%}
+                {%- assign newFolderNamesString = include.structure.child_folder_reqs | join: "," -%}
+                {%- assign completeString = folderNameString | append: "," | append: newFolderNamesString -%}
+                {%- assign new_child_folder_reqs = completeString | split: "," -%}
+            {%- endif -%}
             {%- include nav_child_tag_search.html
                 structure=child_structure
                 required_foldernames=new_child_folder_reqs
